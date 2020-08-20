@@ -1,19 +1,22 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from "react";
 
-let id = 1
+let id = 1;
 
 export default () => {
-  const [html, setHtml] = useState('')
+  const [html, setHtml] = useState("");
 
-  // import('./1.html') // work fine
-  import(`./${id}.html`) // work fail
-  // import('./' + id + '.html') // work fail
-    .then(res => {
-      setHtml(res.default);
-    })
-    .catch(err => {
-      console.log(err);
-    });
+  useEffect(() => {
+    // import('./1.html') // work fine
+    // import('./' + id + '.html') // work fail
+    import(`./${id}.html`) // work fail
+      .then((res) => {
+        setHtml(res.default);
+      })
+      .catch((err) => {
+        console.log(err);
+      });
+  }, []);
+
   return (
     <div>
       <h1>加载完毕</h1>
